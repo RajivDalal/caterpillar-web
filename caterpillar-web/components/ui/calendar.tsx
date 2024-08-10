@@ -1,66 +1,174 @@
 "use client"
+import './calendar.css'
 
-import * as React from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { DayPicker } from "react-day-picker"
+import React, { useState } from "react"
+import {
+  format,
+  startOfMonth,
+  endOfMonth,
+  eachDayOfInterval,
+  addMonths,
+  subMonths,
+  isToday,
+  isSameDay,
+  isWeekend
+} from "date-fns"
+import './calendar.css' // Import the external CSS file
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+type Appointment = {
+  date: Date
+  topic: string
+}
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>
+const Calendar: React.FC = () => {
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date())
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+  const [appointments, setAppointments] = useState<Appointment[]>([])
+  const [appointmentTopic, setAppointmentTopic] = useState<string>("")
 
-function Calendar({
-  className,
-  classNames,
-  showOutsideDays = true,
-  ...props
-}: CalendarProps) {
+  const startDate = startOfMonth(currentMonth)
+  const endDate = endOfMonth(currentMonth)
+
+  // Create an array of days including leading and trailing empty days
+  const getCalendarDays = () => {
+    const daysInCalendar = []
+    const startOfWeek = startDate.getDay() // Sunday = 0
+    const endOfWeek = endDate.getDay() // Saturday = 6
+
+    // Fill leading empty days
+    for (let i = 0; i < startOfWeek; i++) {
+      daysInCalendar.push(null)
+    }
+
+    // Fill days of the current month
+    for (let day of eachDayOfInterval({ start: startDate, end: endDate })) {
+      daysInCalendar.push(day)
+    }
+
+    // Fill trailing empty days
+    for (let i = endOfWeek + 1; i < 7; i++) {
+      daysInCalendar.push(null)
+    }
+
+    return daysInCalendar
+  }
+
+  const handleDayClick = (day: Date) => {
+    setSelectedDate(day)
+  }
+
+  const handleAppointmentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAppointmentTopic(event.target.value)
+  }
+
+  const handleAppointmentSubmit = () => {
+    if (selectedDate && appointmentTopic) {
+      setAppointments((prevAppointments) => [
+        ...prevAppointments,
+        { date: selectedDate, topic: appointmentTopic }
+      ])
+      setAppointmentTopic("")
+      setSelectedDate(null) // Hide the input box after submission
+    }
+  }
+
+  const handleAppointmentRemove = (date: Date) => {
+    setAppointments((prevAppointments) =>
+      prevAppointments.filter((appointment) => !isSameDay(appointment.date, date))
+    )
+  }
+
+  const isAppointmentDate = (date: Date) => {
+    return appointments.some(app => isSameDay(app.date, date))
+  }
+
   return (
-    <DayPicker
-      showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
-      classNames={{
-        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
-        month: "space-y-4",
-        caption: "flex justify-center pt-1 relative items-center",
-        caption_label: "text-sm font-medium",
-        nav: "space-x-1 flex items-center",
-        nav_button: cn(
-          buttonVariants({ variant: "outline" }),
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
-        ),
-        nav_button_previous: "absolute left-1",
-        nav_button_next: "absolute right-1",
-        table: "w-full border-collapse space-y-1",
-        head_row: "flex",
-        head_cell:
-          "text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]",
-        row: "flex w-full mt-2",
-        cell: "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
-        day: cn(
-          buttonVariants({ variant: "ghost" }),
-          "h-9 w-9 p-0 font-normal aria-selected:opacity-100"
-        ),
-        day_range_end: "day-range-end",
-        day_selected:
-          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
-        day_today: "bg-accent text-accent-foreground",
-        day_outside:
-          "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
-        day_disabled: "text-muted-foreground opacity-50",
-        day_range_middle:
-          "aria-selected:bg-accent aria-selected:text-accent-foreground",
-        day_hidden: "invisible",
-        ...classNames,
-      }}
-      components={{
-        IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
-        IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
-      }}
-      {...props}
-    />
+    <div className="calendar-container">
+      <div className="calendar-header">
+        <button
+          onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
+          className="calendar-header-button"
+        >
+          &lt;
+        </button>
+        <span className="calendar-month-label">{format(currentMonth, "MMMM yyyy")}</span>
+        <button
+          onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
+          className="calendar-header-button"
+        >
+          &gt;
+        </button>
+      </div>
+
+      <div className="calendar-grid">
+        {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(day => (
+          <div key={day} className="calendar-day-name">{day}</div>
+        ))}
+        {getCalendarDays().map((day, index) => (
+          <div
+            key={index}
+            onClick={() => day && handleDayClick(day)}
+            className={`calendar-day ${
+              day && isToday(day) ? "today" : ""
+            } ${day && isAppointmentDate(day) ? "appointment" : ""}
+            ${day && isWeekend(day) ? "weekend" : ""}`}
+          >
+            {day ? day.getDate() : ""}
+          </div>
+        ))}
+      </div>
+
+      {selectedDate && (
+        <div className="appointment-box">
+          <h3 className="text-lg font-semibold mb-2">Enter Appointment Topic</h3>
+          <p className="mb-2">Selected Date: {format(selectedDate, "MMMM d, yyyy")}</p>
+          <input
+            type="text"
+            placeholder="Enter appointment topic"
+            value={appointmentTopic}
+            onChange={handleAppointmentChange}
+            className="appointment-input"
+          />
+          <div className="flex space-x-2">
+            <button
+              onClick={handleAppointmentSubmit}
+              className="appointment-button save"
+            >
+              Save
+            </button>
+            <button
+              onClick={() => setSelectedDate(null)}
+              className="appointment-button cancel"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {appointments.length > 0 && (
+        <div className="appointment-list">
+          <h4 className="text-lg font-semibold mb-2">Appointments</h4>
+          <ul>
+            {appointments.map((app, index) => (
+              <li key={index} className="appointment-list-item">
+                <div>
+                  <p className="text-sm font-medium">Date: {format(app.date, "MMMM d, yyyy")}</p>
+                  <p className="text-sm text-gray-600">Topic: {app.topic}</p>
+                </div>
+                <button
+                  onClick={() => handleAppointmentRemove(app.date)}
+                  className="appointment-list-item-button"
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   )
 }
-Calendar.displayName = "Calendar"
 
-export { Calendar }
+export default Calendar

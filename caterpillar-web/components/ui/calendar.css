@@ -1,0 +1,180 @@
+/* General Calendar Container */
+.calendar-container {
+  padding: 0.75rem; /* Padding around the container */
+  max-width: 280px; /* Reduced maximum width */
+  margin: auto; /* Center the calendar */
+  margin-top: 2rem; /* Space between the top of the container and the calendar */
+}
+
+/* Header Styling */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem; /* Space below the header */
+}
+
+.calendar-header-button {
+  padding: 0.3rem; /* Padding inside buttons */
+  background-color: #f0f0f0;
+  color: #4a4a4a;
+  border-radius: 0.3rem; /* Border radius for buttons */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.calendar-header-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Month Label */
+.calendar-month-label {
+  font-size: 0.9rem; /* Font size for the month label */
+  font-weight: 600;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.2rem; /* Space between cells */
+  margin-bottom: 0.75rem; /* Space below the grid */
+}
+
+/* Day of the Week */
+.calendar-day-name {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.8rem; /* Font size for day names */
+}
+
+/* Days */
+.calendar-day {
+  padding: 0.3rem; /* Padding inside day cells */
+  text-align: center;
+  border-radius: 0.3rem; /* Border radius for day cells */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.8rem; /* Font size for days */
+}
+
+.calendar-day.today {
+  background-color: #fef3c7;
+}
+
+.calendar-day.appointment {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.calendar-day.weekend {
+  color: #ef4444;
+}
+
+/* Input and Buttons */
+.appointment-box {
+  margin-top: 1rem; /* Space above the appointment box */
+  padding: 0.5rem; /* Reduced padding inside the box */
+  border: 1px solid #d1d5db;
+  border-radius: 0.4rem; /* Border radius for the box */
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow for a professional look */
+}
+
+.appointment-input {
+  width: 100%;
+  padding: 0.4rem; /* Reduced padding inside input field */
+  border: 1px solid #d1d5db;
+  border-radius: 0.3rem; /* Border radius for input field */
+  margin-bottom: 0.5rem; /* Space below input field */
+  font-size: 0.75rem; /* Smaller font size for input field */
+}
+
+.appointment-button {
+  padding: 0.3rem 0.6rem; /* Reduced padding inside buttons */
+  border-radius: 0.3rem; /* Border radius for buttons */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.75rem; /* Smaller font size for buttons */
+  margin-right: 0.5rem; /* Space between buttons */
+}
+
+.appointment-button.save {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.appointment-button.save:hover {
+  background-color: #2563eb;
+}
+
+.appointment-button.cancel {
+  background-color: #e5e7eb;
+  color: #4a4a4a;
+}
+
+.appointment-button.cancel:hover {
+  background-color: #d1d5db;
+}
+
+/* Appointment List */
+.appointment-list {
+  margin-top: 1rem; /* Space above the appointment list */
+  padding: 0.75rem; /* Padding inside the list */
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem; /* Border radius for the list */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for a professional look */
+  max-height: 200px; /* Set max height to enable scrolling */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.appointment-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d1d5db;
+  padding: 0.5rem 0; /* Padding inside list items */
+  font-size: 0.75rem; /* Smaller font size for list items */
+}
+
+.appointment-list-item:last-child {
+  border-bottom: none;
+}
+
+.appointment-list-item-button {
+  color: #ef4444;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-size: 0.75rem; /* Font size for remove button */
+}
+
+.appointment-list-item-button:hover {
+  color: #dc2626;
+}
+
+/* Show More Button */
+.show-more-button {
+  display: block;
+  margin-top: 0.5rem; /* Space above the button */
+  padding: 0.4rem 0.8rem; /* Padding inside button */
+  background-color: #3b82f6; /* Button background color */
+  color: #ffffff; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 0.3rem; /* Border radius for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 0.75rem; /* Font size for button text */
+  text-align: center; /* Center text */
+  transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+.show-more-button:hover {
+  background-color: #2563eb; /* Darker shade on hover */
+}
+
+/* Style for RightSideDiv container */
+.right-side-container {
+  border-radius: 1rem; /* More rounded corners */
+  padding: 1rem; /* Additional padding to accommodate for spacing */
+  margin: 2px; /* 2px margin on all sides */
+}
