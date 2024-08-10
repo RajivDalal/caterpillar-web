@@ -1,9 +1,20 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
+import { SignInButton, SignOutButton, UserButton } from "@clerk/nextjs";
+import { Authenticated, Unauthenticated, useQuery } from "convex/react";
 
 export default function Home() {
   return (
     <>
-      <Button>Hello Ji</Button> 
+      <main>
+      <Unauthenticated>
+        <SignInButton />
+      </Unauthenticated>
+      <Authenticated>
+        <UserButton />
+      </Authenticated>
+    </main>
     </>
   );
 }
