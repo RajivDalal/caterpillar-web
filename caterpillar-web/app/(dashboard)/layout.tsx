@@ -1,33 +1,33 @@
+// components/DashboardLayout.tsx
 "use client";
 
+import React from "react";
+import RightSideDiv from "@/components/RightSideDiv";
 import SignIn from "@/components/auth/sign-in";
 import { OrgSidebar } from "./_components/org-sidebar";
 import Sidebar from "@/components/Sidebar";
 
+
 interface DashboardLayoutProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const DashboardLayout = ({
-    children
+  children,
 }: DashboardLayoutProps) => {
-    return(
-        <>
-        <main className="h-full">
-            <Sidebar/>
-            <div className="pl=[60px] h-full">
-                <div className="flex gap-x-3 h-full">
-                
-                    <div className="h-full flex-1">
-                        {children}
-                    </div>
-                <OrgSidebar/>    
-                </div>
-            </div>
-        </main>
-        
-        </>
-    )
+  return (
+    <div className="flex h-full min-h-screen">
+      <Sidebar />
+      <div className="flex-grow flex flex-col">
+        <div className="pl-[60px] flex-grow">
+          {children}
+        </div>
+        <SignIn />
+      </div>
+      <RightSideDiv />
+    </div>
+  );
+
 }
 
 export default DashboardLayout;
