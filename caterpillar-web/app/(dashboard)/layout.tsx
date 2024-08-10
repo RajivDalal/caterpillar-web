@@ -1,26 +1,31 @@
 "use client";
 
 import SignIn from "@/components/auth/sign-in";
-import Sidebar from "../../components/Sidebar";
-import exp from "constants";
-import { Children } from "react";
+import { OrgSidebar } from "./_components/org-sidebar";
+import Sidebar from "@/components/Sidebar";
 
 interface DashboardLayoutProps {
     children: React.ReactNode;
 }
 
 const DashboardLayout = ({
-    children,
+    children
 }: DashboardLayoutProps) => {
     return(
         <>
-        <nav className="h-full float-right">
+        <main className="h-full">
+            <Sidebar/>
             <div className="pl=[60px] h-full">
-                {children}
+                <div className="flex gap-x-3 h-full">
+                
+                    <div className="h-full flex-1">
+                        {children}
+                    </div>
+                <OrgSidebar/>    
+                </div>
             </div>
-            <SignIn/>
-        </nav>
-        <Sidebar/>
+        </main>
+        
         </>
     )
 }
