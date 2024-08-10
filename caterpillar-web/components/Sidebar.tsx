@@ -11,7 +11,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <div
-      className={`flex flex-col h-full ${isExpanded ? 'w-64' : 'w-16'} bg-white text-gray-800 transition-all duration-300 ease-in-out`}
+      className={`fixed flex flex-col h-full ${isExpanded ? 'w-64' : 'w-16'} bg-white text-gray-800 transition-all duration-300 ease-in-out`}
     >
       {/* Logo */}
       <div className="flex items-center justify-center py-4">

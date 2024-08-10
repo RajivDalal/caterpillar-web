@@ -4,6 +4,7 @@
 import React from "react";
 import RightSideDiv from "@/components/RightSideDiv";
 import SignIn from "@/components/auth/sign-in";
+import { OrgSidebar } from "./_components/org-sidebar";
 import Sidebar from "@/components/Sidebar";
 
 
@@ -26,6 +27,7 @@ const DashboardLayout = ({
       <RightSideDiv />
     </div>
   );
+
 }
 
 export default DashboardLayout;
