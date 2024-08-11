@@ -10,13 +10,13 @@ body,
 }
 
 .cl-avatarBox {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 .sign-in-container {
   position: fixed;
-  top: 20px; /* Adjust as needed */
+  top: 15px; /* Adjust as needed */
   right: 25px; /* Adjust to create space for the notification button */
   display: flex;
   justify-content: space-between;
