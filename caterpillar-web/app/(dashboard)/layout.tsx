@@ -2,9 +2,7 @@
 "use client";
 
 import React from "react";
-import RightSideDiv from "@/components/RightSideDiv";
-import SignIn from "@/components/auth/sign-in";
-import { OrgSidebar } from "./_components/org-sidebar";
+import RightSideDiv from "./_components/RightSideDiv";
 import Sidebar from "@/components/Sidebar";
 
 
@@ -16,13 +14,12 @@ const DashboardLayout = ({
   children,
 }: DashboardLayoutProps) => {
   return (
-    <div className="flex h-full min-h-screen">
+    <div className="h-full min-h-screen">
       <Sidebar />
-      <div className="flex-grow flex flex-col">
+      <div className="">
         <div className="pl-[60px] flex-grow">
           {children}
         </div>
-        <SignIn />
       </div>
       <RightSideDiv />
     </div>

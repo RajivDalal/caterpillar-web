@@ -9,51 +9,21 @@ body,
   height: 100%;
 }
 
-/* global.css or a CSS file imported in _app.tsx */
-
-/* global.css */
+.cl-avatarBox {
+  width: 2.25rem;
+  height: 2.25rem;
+}
 
 .sign-in-container {
   position: fixed;
-  top: 10px; /* Adjust as needed */
-  right: 30px; /* Adjust to create space for the notification button */
+  top: 20px; /* Adjust as needed */
+  right: 25px; /* Adjust to create space for the notification button */
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px; /* Adjust spacing between buttons */
+  gap: 22px; /* Adjust spacing between buttons */
   z-index: 1000; /* Ensure it appears on top of other content */
 }
-
-.notificationButton {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.bellIcon {
-  width: 24px;
-  height: 24px;
-  color: #000; /* Adjust color as needed */
-}
-
-.badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background: red;
-  color: white;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-}
-
-
 
 @layer base {
   :root {
@@ -118,6 +88,6 @@ body,
   }
   body {
     @apply bg-background text-foreground;
-    background-color: #d9dfdf;
+    background-color: #f3f4f6;
   }
 }
