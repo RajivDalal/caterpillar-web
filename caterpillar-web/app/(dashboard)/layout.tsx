@@ -3,7 +3,7 @@
 
 import React from "react";
 import RightSideDiv from "./_components/RightSideDiv";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/app/(dashboard)/_components/sidebar/Sidebar";
 
 
 interface DashboardLayoutProps {

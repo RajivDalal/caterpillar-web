@@ -16,7 +16,7 @@ body,
 
 .sign-in-container {
   position: fixed;
-  top: 15px; /* Adjust as needed */
+  top: 1rem; /* Adjust as needed */
   right: 25px; /* Adjust to create space for the notification button */
   display: flex;
   justify-content: space-between;

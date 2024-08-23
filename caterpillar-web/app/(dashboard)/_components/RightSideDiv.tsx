@@ -5,7 +5,7 @@ import SignIn from '../../../components/sign-in';
 const RightSideDiv= () => {
   return (
     <>
-    <div className="fixed right-0 top-0 h-full bg-white py-[4rem] shadow-md overflow-auto">
+    <div className="fixed right-0 top-0 h-full bg-white py-[4rem] shadow-md overflow-auto select-none">
       <SignIn />
       <Calendar/>
     </div>

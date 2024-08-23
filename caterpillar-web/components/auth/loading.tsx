@@ -8,8 +8,8 @@ export default function Loading()
                 <Image 
                     src={"/logo.svg"} 
                     alt={"Logo"}
-                    width={120}
-                    height={120}
+                    width={256}
+                    height={256}
                     className="animate-pulse duration-700"
                 />
             </div>
